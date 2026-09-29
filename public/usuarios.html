@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios - Sistema Veterinaria</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- HEADER COPIADO DEL DASHBOARD -->
+     <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <span>🐷 Sistema de Gestión Porcina</span>
+            </div>
+                <nav class="nav-menu">
+                <a href="dashboard.html" >Dashboard</a>
+                <a href="usuarios.html" class="active">Usuarios</a>
+                <a href="cerdos.html" >Cerdos</a>
+                <a href="reportes.html">Reportes</a>
+                <a href="alimentacion.html">Alimentación</a>
+                <a href="ventas.html">Ventas</a>
+                <a href="proveedores.html">Proveedores</a>
+                <a href="vacunas.html">Vacunas</a>
+                <a href="index.html" id="cerrarSesion">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="dashboard-container">
+            
+            <h1 class="dashboard-title">Gestión de Usuarios</h1>
+            <p class="dashboard-subtitle">Administra los accesos y roles del personal de la clínica</p>
+
+            <!-- SECCIÓN PARA CREAR USUARIO -->
+            <div class="section" style="margin-bottom: 30px;">
+                <h3>🆕 Crear Nuevo Usuario</h3>
+                <form id="formCrearUsuario" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div>
+                        <label>Nombre Completo</label>
+                        <input type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
+                    </div>
+                    <div>
+                        <label>Correo Electrónico</label>
+                        <input type="email" id="email" placeholder="juan@veterinaria.com" required>
+                    </div>
+                    <div>
+                        <label>Rol de Usuario</label>
+                        <select id="rol" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <option value="admin">Administrador</option>
+                            <option value="veterinario">Veterinario</option>
+                            <option value="operario">Operario</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: flex-end;">
+                        <button type="submit" style="margin-bottom: 15px;">Registrar Usuario</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- SECCIÓN LISTADO DE USUARIOS -->
+            <div class="section">
+                <h3>👥 Usuarios Existentes</h3>
+                <div class="search-bar" style="margin-top: 15px;">
+                    <input type="text" id="buscUsu" placeholder="🔍 Buscar por nombre o correo...">
+                </div>
+
+                <div class="table-responsive">
+                    <table id="tablaUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ana García</td>
+                                <td>ana.admin@clinica.com</td>
+                                <td><span style="color: #E67E22; font-weight: bold;">Admin</span></td>
+                                <td>✅ Activo</td>
+                                <td>
+                                    <button class="delete-btn" title="Editar">✏️</button>
+                                    <button class="delete-btn" title="Eliminar">🗑️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Carlos Ruiz</td>
+                                <td>c.ruiz@veterinaria.com</td>
+                                <td><span style="color: #2E86C1; font-weight: bold;">Veterinario</span></td>
+                                <td>✅ Activo</td>
+                                <td>
+                                    <button class="delete-btn" title="Editar">✏️</button>
+                                    <button class="delete-btn" title="Eliminar">🗑️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Luis Mora</td>
+                                <td>l.mora@staff.com</td>
+                                <td><span style="color: #27AE60; font-weight: bold;">Operario</span></td>
+                                <td>✅ Activo</td>
+                                <td>
+                                    <button class="delete-btn" title="Editar">✏️</button>
+                                    <button class="delete-btn" title="Eliminar">🗑️</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Sistema de Gestión Veterinaria - Panel de Control</p>
+        </div>
+    </footer>
+
+</body>
+</html>

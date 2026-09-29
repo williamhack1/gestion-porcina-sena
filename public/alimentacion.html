@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Alimentación - Sistema Porcino</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <span>🐷 Sistema de Gestión Porcina</span>
+            </div>
+                <nav class="nav-menu">
+                <a href="dashboard.html" >Dashboard</a>
+                <a href="usuarios.html">Usuarios</a>
+                <a href="cerdos.html">Cerdos</a>
+                <a href="reportes.html">Reportes</a>
+                <a href="alimentacion.html" class="active">Alimentación</a>
+                <a href="ventas.html">Ventas</a>
+                <a href="proveedores.html">Proveedores</a>
+                <a href="vacunas.html">Vacunas</a>
+                <a href="index.html" id="cerrarSesion">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+        <div class="dashboard-container">
+            <h1 class="dashboard-title">Registro de Alimentación</h1>
+            <p class="dashboard-subtitle">Control diario del suministro de alimento y raciones por cerdo.</p>
+
+            <!-- FORMULARIO DE REGISTRO (CAMPOS BD: alimentacion) -->
+            <div class="section" style="margin-bottom: 30px;">
+                <h2>Registrar Suministro de Alimento</h2>
+                <br>
+                <form id="alimentacionForm">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                        
+                        <div>
+                            <label for="tipoAlimento">Tipo de Alimento</label>
+                            <input type="text" id="tipoAlimento" placeholder="Ej. Concentrado Iniciador, Gestación" required>
+                        </div>
+
+                        <div>
+                            <label for="cantidadKg">Cantidad (Kg)</label>
+                            <input type="number" id="cantidadKg" step="0.01" min="0" placeholder="Ej. 2.50" required>
+                        </div>
+
+                        <div>
+                            <label for="fechaAlimento">Fecha de Suministro</label>
+                            <input type="date" id="fechaAlimento" required>
+                        </div>
+
+                        <div>
+                            <label for="idCerdo">Cerdo (ID / Nombre)</label>
+                            <select id="idCerdo" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;" required>
+                                <option value="">Seleccione un cerdo...</option>
+                                <option value="1">ID 1 - Cerdo Alfa</option>
+                                <option value="2">ID 2 - Cerdo Beta</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label for="idUsuario">Encargado / Operario</label>
+                        <select id="idUsuario" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;" required>
+                            <option value="">Seleccione el responsable...</option>
+                            <option value="1">Operario Juan Pérez</option>
+                            <option value="2">Operario Mateo Gómez</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" style="max-width: 220px; margin-top: 10px;">Registrar Alimentación</button>
+                </form>
+            </div>
+
+            <!-- TABLA DE REGISTROS DE ALIMENTACIÓN -->
+            <div class="section">
+                <h2>Historial de Suministro de Alimento</h2>
+                <br>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar por tipo de alimento, cerdo o encargado...">
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo de Alimento</th>
+                                <th>Cantidad (Kg)</th>
+                                <th>Fecha</th>
+                                <th>Cerdo</th>
+                                <th>Encargado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="alimentacionTableBody">
+                            <tr>
+                                <td>1</td>
+                                <td>Concentrado Crecimiento</td>
+                                <td>3.50 Kg</td>
+                                <td>2026-03-19</td>
+                                <td>ID 1 - Cerdo Alfa</td>
+                                <td>Operario Juan Pérez</td>
+                                <td>
+                                    <button class="delete-btn" title="Eliminar registro">🗑️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Pre-iniciador</td>
+                                <td>1.80 Kg</td>
+                                <td>2026-03-19</td>
+                                <td>ID 2 - Cerdo Beta</td>
+                                <td>Operario Mateo Gómez</td>
+                                <td>
+                                    <button class="delete-btn" title="Eliminar registro">🗑️</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Sistema de Gestión Porcina - Todos los derechos reservados</p>
+            <div class="footer-links">
+                <a href="#">Política de privacidad</a> |
+                <a href="#">Términos de uso</a> |
+                <a href="#">Soporte</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

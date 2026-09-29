@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes Veterinaria - SENA Colombia</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Estilos rápidos para simular gráficos sin librerías externas */
+        .chart-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+            height: 150px;
+            padding-top: 20px;
+            border-bottom: 2px solid #ccc;
+            margin-top: 20px;
+        }
+        .bar {
+            flex: 1;
+            background: #2E86C1;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: height 1s;
+        }
+        .bar::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            color: #666;
+            white-space: nowrap;
+        }
+        .circle-chart {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#E74C3C 1.5%, #ecf0f1 0); /* 1.5% Mortalidad */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            border: 5px solid #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .circle-inner {
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+  <!-- HEADER (mismo que el login) -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <span>🐷 Sistema de Gestión Porcina</span>
+            </div>
+                <nav class="nav-menu">
+                <a href="dashboard.html" >Dashboard</a>
+                <a href="usuarios.html" >Usuarios</a>
+                <a href="cerdos.html" >Cerdos</a>
+                <a href="reportes.html" class="active">Reportes</a>
+                <a href="alimentacion.html">Alimentación</a>
+                <a href="ventas.html">Ventas</a>
+                <a href="proveedores.html">Proveedores</a>
+                <a href="vacunas.html">Vacunas</a>
+                <a href="index.html" id="cerrarSesion">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="dashboard-container">
+            
+            <h1 class="dashboard-title">Informes de Gestión (COP)</h1>
+            <p class="dashboard-subtitle">Análisis de rendimiento de la granja - Sede Colombia</p>
+
+            <!-- Gráficos Visuales Rápidos -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                
+                <!-- Gráfico de Barras: Ventas Mensuales -->
+                <div class="section">
+                    <h3>📈 Ventas Mensuales (Millones)</h3>
+                    <div class="chart-container">
+                        <div class="bar" style="height: 40%;" data-label="Ene"></div>
+                        <div class="bar" style="height: 65%;" data-label="Feb"></div>
+                        <div class="bar" style="height: 90%;" data-label="Mar"></div>
+                        <div class="bar" style="height: 75%;" data-label="Abr"></div>
+                    </div>
+                </div>
+
+                <!-- Gráfico Circular: Salud / Mortalidad -->
+                <div class="section" style="text-align: center;">
+                    <h3>📉 Tasa de Mortalidad</h3>
+                    <div class="circle-chart">
+                        <div class="circle-inner">
+                            <strong style="font-size: 20px; color: #E74C3C;">1.5%</strong>
+                            <span>Meta < 2%</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 13px; color: #7f8c8d;">Basado en 200 ejemplares este mes</p>
+                </div>
+
+            </div>
+
+            <!-- Resumen de Cifras -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Ventas</h3>
+                    <div class="stat-value"><span class="stat-unit">$</span> 12.5M</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Gasto Alimento</h3>
+                    <div class="stat-value"><span class="stat-unit">$</span> 4.2M</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Conversión</h3>
+                    <div class="stat-value">2.8 <span class="stat-unit">kg</span></div>
+                </div>
+                <div class="stat-card">
+                    <h3>Salud Óptima</h3>
+                    <div class="stat-value">98.5 <span class="stat-unit">%</span></div>
+                </div>
+            </div>
+
+            <!-- Detalle de Ventas en Pesos Colombianos -->
+            <div class="section">
+                <h3>Detalle Financiero - Lotes de Venta</h3>
+                <div class="table-responsive" style="margin-top: 15px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Código Lote</th>
+                                <th>Raza</th>
+                                <th>Peso Total</th>
+                                <th>Precio x Kilo</th>
+                                <th>Total Venta (COP)</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>LOT-2024-01</td>
+                                <td>Yorkshire</td>
+                                <td>2,500 kg</td>
+                                <td>$ 9.200</td>
+                                <td><strong>$ 23.000.000</strong></td>
+                                <td><span style="background: #d4efdf; color: #1d8348; padding: 4px 8px; border-radius: 4px;">Pagado</span></td>
+                            </tr>
+                            <tr>
+                                <td>LOT-2024-02</td>
+                                <td>Duroc</td>
+                                <td>1,800 kg</td>
+                                <td>$ 9.500</td>
+                                <td><strong>$ 17.100.000</strong></td>
+                                <td><span style="background: #fcf3cf; color: #9c640c; padding: 4px 8px; border-radius: 4px;">Pendiente</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Proyecto SENA - Gestión Porcina Colombiana</p>
+        </div>
+    </footer>
+
+</body>
+</html>

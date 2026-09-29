@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Cerdos - SENA</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+       <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <span>🐷 Sistema de Gestión Porcina</span>
+            </div>
+                <nav class="nav-menu">
+                <a href="dashboard.html" >Dashboard</a>
+                <a href="usuarios.html">Usuarios</a>
+                <a href="cerdos.html" class="active">Cerdos</a>
+                <a href="reportes.html">Reportes</a>
+                <a href="alimentacion.html">Alimentación</a>
+                <a href="ventas.html">Ventas</a>
+                <a href="proveedores.html">Proveedores</a>
+                <a href="vacunas.html">Vacunas</a>
+                <a href="index.html" id="cerrarSesion">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="dashboard-container">
+            
+            <h1 class="dashboard-title">Registro de Animales</h1>
+            <p class="dashboard-subtitle">Ingresa nuevos ejemplares al sistema y gestiona su estado</p>
+
+                        <!-- FORMULARIO DE REGISTRO BASADO EN TU DB -->
+            <div class="section" style="margin-bottom: 30px;">
+                <h3 id="tituloFormCerdo">📝 Ficha de Registro</h3>
+                <form id="formRegistroCerdo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div>
+                        <label>Nombre / Identificador</label>
+                        <input type="text" id="nombreCerdo" placeholder="Ej. CRD-007" required>
+                    </div>
+                    <div>
+                        <label>Raza</label>
+                        <select id="raza" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <option value="Yorkshire">Yorkshire</option>
+                            <option value="Duroc">Duroc</option>
+                            <option value="Landrace">Landrace</option>
+                            <option value="Hampshire">Hampshire</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Sexo</label>
+                        <select id="sexo" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <option value="Macho">Macho</option>
+                            <option value="Hembra">Hembra</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Fecha de Nacimiento</label>
+                        <input type="date" id="fechaNacimiento" required>
+                    </div>
+                    <div>
+                        <label>Peso Actual (kg)</label>
+                        <input type="number" step="0.01" id="pesoActual" placeholder="0.00" required>
+                    </div>
+                    <div>
+                        <label>Estado de Salud</label>
+                        <select id="estadoSalud" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <option value="Excelente">Excelente</option>
+                            <option value="Estable">Estable</option>
+                            <option value="En Tratamiento">En Tratamiento</option>
+                            <option value="Crítico">Crítico</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Vendido">Vendido</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: flex-end; gap: 10px;">
+                        <button type="submit" style="margin-bottom: 15px; background-color: #27AE60;">Guardar Registro</button>
+                        <button type="button" id="btnCancelar" style="margin-bottom: 15px; background-color: #888; display:none;">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- TABLA DE INVENTARIO -->
+            <div class="section">
+                <h3>📋 Inventario de Cerdos</h3>
+                <div class="search-bar" style="margin-top: 15px;">
+                    <input type="text" id="buscarCerdo" placeholder="🔍 Buscar por nombre, raza o estado...">
+                </div>
+
+                                <div class="table-responsive">
+                    <table id="tablaCerdos">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Raza</th>
+                                <th>Sexo</th>
+                                <th>Edad (Meses)</th>
+                                <th>Peso (kg)</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Los datos se cargan dinamicamente desde la API -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+        <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Proyecto SENA - Gestión Porcina</p>
+        </div>
+    </footer>
+
+        <script src="js/cerdos.js"></script>
+
+</body>
+</html>

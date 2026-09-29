@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Vacunas - Sistema Porcino</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+     <!-- HEADER (mismo que el login) -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <span>🐷 Sistema de Gestión Porcina</span>
+            </div>
+                <nav class="nav-menu">
+                <a href="dashboard.html" >Dashboard</a>
+                <a href="usuarios.html" >Usuarios</a>
+                <a href="cerdos.html" >Cerdos</a>
+                <a href="reportes.html" >Reportes</a>
+                <a href="alimentacion.html">Alimentación</a>
+                <a href="ventas.html" >Ventas</a>
+                <a href="proveedores.html" >Proveedores</a>
+                <a href="vacunas.html" class="active">Vacunas</a>
+                <a href="index.html" id="cerrarSesion">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+        <div class="dashboard-container">
+            <h1 class="dashboard-title">Control Sanitarios y Vacunación</h1>
+            <p class="dashboard-subtitle">Registro y seguimiento del plan de vacunación del ganado porcino.</p>
+
+            <!-- FORMULARIO DE REGISTRO (CAMPOS BD: vacuna) -->
+            <div class="section" style="margin-bottom: 30px;">
+                <h2>Registrar Nueva Vacuna</h2>
+                <br>
+                <form id="vacunaForm">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                        
+                        <div>
+                            <label for="nombreVacuna">Nombre de la Vacuna</label>
+                            <input type="text" id="nombreVacuna" placeholder="Ej. Parvovirus, Peste Porcina" required>
+                        </div>
+
+                        <div>
+                            <label for="idCerdo">Cerdo (ID / Nombre)</label>
+                            <select id="idCerdo" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;" required>
+                                <option value="">Seleccione un cerdo...</option>
+                                <option value="1">ID 1 - Cerdo Alfa</option>
+                                <option value="2">ID 2 - Cerdo Beta</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="fechaAplicacion">Fecha de Aplicación</label>
+                            <input type="date" id="fechaAplicacion" required>
+                        </div>
+
+                        <div>
+                            <label for="idUsuario">Veterinario / Zootecnista</label>
+                            <select id="idUsuario" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;" required>
+                                <option value="">Seleccione el responsable...</option>
+                                <option value="101">Dr. Carlos Mendoza</option>
+                                <option value="102">Dra. María Gómez</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label for="descripcion">Descripción / Dosis</label>
+                        <input type="text" id="descripcion" placeholder="Ej. Aplicación de 2ml vía intramuscular" required>
+                    </div>
+
+                    <button type="submit" style="max-width: 200px; margin-top: 10px;">Registrar Vacuna</button>
+                </form>
+            </div>
+
+            <!-- TABLA DE REGISTROS DE VACUNAS -->
+            <div class="section">
+                <h2>Historial de Vacunación</h2>
+                <br>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar por nombre de vacuna, cerdo o veterinario...">
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Vacuna</th>
+                                <th>Descripción</th>
+                                <th>Fecha Aplicación</th>
+                                <th>Cerdo</th>
+                                <th>Responsable</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vacunasTableBody">
+                            <tr>
+                                <td>1</td>
+                                <td>Mycoplasma</td>
+                                <td>Dosis de refuerzo 2ml</td>
+                                <td>2026-03-15</td>
+                                <td>ID 1 - Cerdo Alfa</td>
+                                <td>Dr. Carlos Mendoza</td>
+                                <td>
+                                    <button class="delete-btn" title="Eliminar registro">🗑️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Circovirus</td>
+                                <td>Primera dosis lechón</td>
+                                <td>2026-03-18</td>
+                                <td>ID 2 - Cerdo Beta</td>
+                                <td>Dra. María Gómez</td>
+                                <td>
+                                    <button class="delete-btn" title="Eliminar registro">🗑️</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Sistema de Gestión Porcina - Todos los derechos reservados</p>
+            <div class="footer-links">
+                <a href="#">Política de privacidad</a> |
+                <a href="#">Términos de uso</a> |
+                <a href="#">Soporte</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

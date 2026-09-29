@@ -1,0 +1,42 @@
+### Variables
+@baseUrl = http://localhost:3000/api
+
+### Health check
+GET {{baseUrl}}/health
+
+### Listar todos los cerdos
+GET {{baseUrl}}/cerdos
+
+### Obtener un cerdo por id
+GET {{baseUrl}}/cerdos/1
+
+### Crear un cerdo
+POST {{baseUrl}}/cerdos
+Content-Type: application/json
+
+{
+  "codigo": "CRD-010",
+  "raza": "Landrace",
+  "sexo": "Hembra",
+  "fecha_nacimiento": "2024-05-01",
+  "peso_kg": 88.5,
+  "estado": "Activo",
+  "observaciones": "Cerda reproductora"
+}
+
+### Actualizar un cerdo
+PUT {{baseUrl}}/cerdos/1
+Content-Type: application/json
+
+{
+  "codigo": "CRD-001",
+  "raza": "Yorkshire",
+  "sexo": "Macho",
+  "fecha_nacimiento": "2024-01-10",
+  "peso_kg": 120.00,
+  "estado": "Vendido",
+  "observaciones": "Actualizado desde la API"
+}
+
+### Eliminar un cerdo
+DELETE {{baseUrl}}/cerdos/2

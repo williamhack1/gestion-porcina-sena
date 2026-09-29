@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proveedores</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+   <!-- HEADER (mismo que el login) -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <span>🐷 Sistema de Gestión Porcina</span>
+            </div>
+                <nav class="nav-menu">
+                <a href="dashboard.html" >Dashboard</a>
+                <a href="usuarios.html" >Usuarios</a>
+                <a href="cerdos.html" >Cerdos</a>
+                <a href="reportes.html" >Reportes</a>
+                <a href="alimentacion.html">Alimentación</a>
+                <a href="ventas.html" >Ventas</a>
+                <a href="proveedores.html" class="active">Proveedores</a>
+                <a href="vacunas.html">Vacunas</a>
+                <a href="index.html" id="cerrarSesion">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+        <div class="dashboard-container">
+            <h1 class="dashboard-title">Gestión de Proveedores</h1>
+            <p class="dashboard-subtitle">Administración de contactos y proveedores de insumos o servicios.</p>
+
+            <!-- FORMULARIO DE REGISTRO (CAMPOS BD: proveedor) -->
+            <div class="section" style="margin-bottom: 30px;">
+                <h2>Registrar Nuevo Proveedor</h2>
+                <br>
+                <form id="proveedorForm">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                        
+                        <div>
+                            <label for="nombreProveedor">Nombre del Proveedor / Empresa</label>
+                            <input type="text" id="nombreProveedor" placeholder="Ej. Agroveterinaria El Campo" required>
+                        </div>
+
+                        <div>
+                            <label for="tipoProducto">Tipo de Producto / Servicio</label>
+                            <input type="text" id="tipoProducto" placeholder="Ej. Alimento concentrado, Medicamentos" required>
+                        </div>
+
+                        <div>
+                            <label for="contacto">Contacto (Teléfono / Correo)</label>
+                            <input type="text" id="contacto" placeholder="Ej. 3101234567 / contacto@elcampo.com" required>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" style="max-width: 220px; margin-top: 10px;">Registrar Proveedor</button>
+                </form>
+            </div>
+
+            <!-- TABLA DE REGISTROS DE PROVEEDORES -->
+            <div class="section">
+                <h2>Directorio de Proveedores</h2>
+                <br>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar por nombre, producto o contacto...">
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Tipo de Producto</th>
+                                <th>Contacto</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="proveedoresTableBody">
+                            <tr>
+                                <td>1</td>
+                                <td>NutriPorcinos S.A.S.</td>
+                                <td>Alimento Concentrado</td>
+                                <td>+57 300 987 6543 / ventas@nutriporcinos.com</td>
+                                <td>
+                                    <button class="delete-btn" title="Eliminar registro">🗑️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>FarmaVet Colombia</td>
+                                <td>Vacunas y Medicamentos</td>
+                                <td>+57 311 234 5678 / contacto@farmavet.co</td>
+                                <td>
+                                    <button class="delete-btn" title="Eliminar registro">🗑️</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Sistema de Gestión Porcina - Todos los derechos reservados</p>
+            <div class="footer-links">
+                <a href="#">Política de privacidad</a> |
+                <a href="#">Términos de uso</a> |
+                <a href="#">Soporte</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

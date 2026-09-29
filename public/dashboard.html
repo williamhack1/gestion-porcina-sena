@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Gestión Veterinaria</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Estilos adicionales para el dashboard */
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .dashboard-title {
+            color: #2E86C1;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        /* Tarjetas de estadísticas */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2E86C1;
+        }
+
+        .stat-unit {
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Secciones */
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .section h3 {
+            color: #2E86C1;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        /* Barra de búsqueda */
+        .search-bar {
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* Tabla */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #555;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            margin: 0 2px;
+        }
+
+        .delete-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Enlace activo en el menú */
+        .nav-menu a.active {
+            background-color: #1f618d;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER (mismo que el login) -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <span>🐷 Sistema de Gestión Porcina</span>
+            </div>
+                <nav class="nav-menu">
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="usuarios.html" >Usuarios</a>
+                <a href="cerdos.html" >Cerdos</a>
+                <a href="reportes.html">Reportes</a>
+                <a href="alimentacion.html">Alimentación</a>
+                <a href="ventas.html">Ventas</a>
+                <a href="proveedores.html">Proveedores</a>
+                <a href="vacunas.html">Vacunas</a>
+                <a href="index.html" id="cerrarSesion">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <div class="dashboard-container">
+            
+            <h1 class="dashboard-title">Sistema de Gestión Veterinaria</h1>
+            <p class="dashboard-subtitle">Administra usuarios, registro de animales y ventas de la clínica</p>
+
+            <!-- Tarjetas de estadísticas -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Ventas</h3>
+                    <div class="stat-value">3</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Ingresos Totales</h3>
+                    <div class="stat-value">2.550,00 <span class="stat-unit">€</span></div>
+                </div>
+                <div class="stat-card">
+                    <h3>Precio Promedio</h3>
+                    <div class="stat-value">850,00 <span class="stat-unit">€</span></div>
+                </div>
+                <div class="stat-card">
+                    <h3>Disponibles</h3>
+                    <div class="stat-value">3</div>
+                </div>
+            </div>
+
+            <!-- Sección de Ventas -->
+            <div class="section">
+                <h3>📊 Venta de Cerdos</h3>
+                <p style="margin-bottom: 15px; color: #666;">Registra y administra las ventas de cerdos de la granja</p>
+
+                <!-- Buscador -->
+                <div class="search-bar">
+                    <input type="text" id="buscador" placeholder="🔍 Buscar por código, comprador, vendedor o raza...">
+                </div>
+
+                <!-- Tabla de ventas -->
+                <div class="table-responsive">
+                    <table id="tablaVentas">
+                        <thead>
+                            <tr>
+                                <th>Código Cerdo</th>
+                                <th>Raza</th>
+                                <th>Fecha Venta</th>
+                                <th>Precio</th>
+                                <th>Comprador</th>
+                                <th>Vendedor</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td># CRD-001</td>
+                                <td>Yorkshire</td>
+                                <td>2024-03-15</td>
+                                <td>850,00 €</td>
+                                <td>Granja Los Robles S.A.</td>
+                                <td>Ana García</td>
+                                <td>
+                                    <button class="delete-btn" title="Eliminar">🗑️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td># CRD-003</td>
+                                <td>Duroc</td>
+                                <td>2024-03-18</td>
+                                <td>920,00 €</td>
+                                <td>Cárnicas del Norte</td>
+                                <td>Ana García</td>
+                                <td>
+                                    <button class="delete-btn" title="Eliminar">🗑️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td># CRD-005</td>
+                                <td>Yorkshire</td>
+                                <td>2024-03-20</td>
+                                <td>780,00 €</td>
+                                <td>Distribuidora Ganadera</td>
+                                <td>Ana García</td>
+                                <td>
+                                    <button class="delete-btn" title="Eliminar">🗑️</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Sistema de Gestión Veterinaria - Todos los derechos reservados</p>
+            <div class="footer-links">
+                <a href="#">Política de privacidad</a> |
+                <a href="#">Términos de uso</a> |
+                <a href="#">Soporte</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Buscador en tiempo real
+        document.getElementById('buscador').addEventListener('keyup', function() {
+            let filtro = this.value.toLowerCase();
+            let filas = document.querySelectorAll('#tablaVentas tbody tr');
+            
+            filas.forEach(fila => {
+                let texto = fila.innerText.toLowerCase();
+                if (texto.includes(filtro)) {
+                    fila.style.display = '';
+                } else {
+                    fila.style.display = 'none';
+                }
+            });
+        });
+
+        // Eliminar fila (con confirmación)
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm('¿Estás seguro de eliminar esta venta?')) {
+                    this.closest('tr').remove();
+                    alert('Venta eliminada');
+                }
+            });
+        });
+
+        // Cerrar sesión
+        document.getElementById('cerrarSesion').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('¿Cerrar sesión?')) {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+
+</body>
+</html>
