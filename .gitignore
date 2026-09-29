@@ -25,3 +25,7 @@ build/
 
 # Carpeta temporal de entrega
 entrega_repo_gestion_porcina/
+
+# Archivos comprimidos de entrega
+*.zip
+*.rar

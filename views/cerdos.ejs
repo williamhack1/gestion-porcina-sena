@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= titulo %> - Sistema Porcino</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <span>🐷 Sistema de Gestión Porcina</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="/dashboard.html">Dashboard</a>
+                <a href="/cerdos" class="active">Cerdos</a>
+                <a href="/reportes.html">Reportes</a>
+                <a href="/index.html" id="cerrarSesion">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="dashboard-container">
+
+            <h1 class="dashboard-title">Registro de Animales</h1>
+            <p class="dashboard-subtitle">Ingresa nuevos ejemplares al sistema y gestiona su estado</p>
+
+            <%# Mensajes de exito o error (renderizados con EJS) %>
+            <% if (mensaje) { %>
+                <div style="background:#E8F8F5; color:#1E8449; padding:12px 16px; border-radius:8px; margin-bottom:20px;">
+                    ✅ <%= mensaje %>
+                </div>
+            <% } %>
+            <% if (error) { %>
+                <div style="background:#FDEDEC; color:#C0392B; padding:12px 16px; border-radius:8px; margin-bottom:20px;">
+                    ⚠️ <%= error %>
+                </div>
+            <% } %>
+
+            <!-- FORMULARIO: envia por POST a /cerdos/guardar -->
+            <div class="section" style="margin-bottom: 30px;">
+                <h3><%= cerdoEditar ? '✏️ Editar Registro' : '📝 Ficha de Registro' %></h3>
+
+                <form method="POST" action="/cerdos/guardar"
+                      style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+
+                    <%# Campo oculto con el id cuando se edita %>
+                    <% if (cerdoEditar) { %>
+                        <input type="hidden" name="id_cerdo" value="<%= cerdoEditar.id_cerdo %>">
+                    <% } %>
+
+                    <div>
+                        <label>Nombre / Identificador</label>
+                        <input type="text" name="codigo" placeholder="Ej. CRD-007" required
+                               value="<%= cerdoEditar ? cerdoEditar.codigo : '' %>">
+                    </div>
+                    <div>
+                        <label>Raza</label>
+                        <select name="raza" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <% const razas = ['Yorkshire','Duroc','Landrace','Hampshire']; %>
+                            <% razas.forEach(function(r) { %>
+                                <option value="<%= r %>" <%= (cerdoEditar && cerdoEditar.raza === r) ? 'selected' : '' %>><%= r %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Sexo</label>
+                        <select name="sexo" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <% const sexos = ['Macho','Hembra']; %>
+                            <% sexos.forEach(function(s) { %>
+                                <option value="<%= s %>" <%= (cerdoEditar && cerdoEditar.sexo === s) ? 'selected' : '' %>><%= s %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Fecha de Nacimiento</label>
+                        <input type="date" name="fecha_nacimiento" required
+                               value="<%= cerdoEditar && cerdoEditar.fecha_nacimiento ? String(cerdoEditar.fecha_nacimiento).substring(0,10) : '' %>">
+                    </div>
+                    <div>
+                        <label>Peso Actual (kg)</label>
+                        <input type="number" step="0.01" name="peso_kg" placeholder="0.00" required
+                               value="<%= cerdoEditar ? cerdoEditar.peso_kg : '' %>">
+                    </div>
+                    <div>
+                        <label>Estado de Salud</label>
+                        <select name="estado" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <% const estados = ['Excelente','Estable','En Tratamiento','Crítico','Activo','Vendido']; %>
+                            <% estados.forEach(function(e) { %>
+                                <option value="<%= e %>" <%= (cerdoEditar && cerdoEditar.estado === e) ? 'selected' : '' %>><%= e %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: flex-end; gap: 10px;">
+                        <button type="submit" style="margin-bottom: 15px; background-color: #27AE60;">
+                            <%= cerdoEditar ? 'Actualizar Registro' : 'Guardar Registro' %>
+                        </button>
+                        <% if (cerdoEditar) { %>
+                            <a href="/cerdos" style="margin-bottom: 15px; padding: 10px 20px; background:#888; color:#fff; border-radius:5px; text-decoration:none;">Cancelar</a>
+                        <% } %>
+                    </div>
+                </form>
+            </div>
+
+            <!-- TABLA: datos renderizados con EJS desde MySQL -->
+            <div class="section">
+                <h3>📋 Inventario de Cerdos</h3>
+                <div class="search-bar" style="margin-top: 15px;">
+                    <input type="text" id="buscarCerdo" placeholder="🔍 Buscar por nombre, raza o estado...">
+                </div>
+
+                <div class="table-responsive">
+                    <table id="tablaCerdos">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Raza</th>
+                                <th>Sexo</th>
+                                <th>Peso (kg)</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (cerdos.length === 0) { %>
+                                <tr><td colspan="6" style="text-align:center; color:#888;">No hay cerdos registrados</td></tr>
+                            <% } %>
+                            <% cerdos.forEach(function(c) { %>
+                                <tr>
+                                    <td># <%= c.codigo %></td>
+                                    <td><%= c.raza %></td>
+                                    <td><%= c.sexo %></td>
+                                    <td><%= c.peso_kg %></td>
+                                    <td>● <%= c.estado %></td>
+                                    <td>
+                                        <a href="/cerdos/editar/<%= c.id_cerdo %>" class="delete-btn" title="Editar">✏️</a>
+                                        <form method="POST" action="/cerdos/eliminar/<%= c.id_cerdo %>" style="display:inline;"
+                                              onsubmit="return confirm('¿Eliminar el cerdo <%= c.codigo %>?');">
+                                            <button type="submit" class="delete-btn" title="Eliminar">🗑️</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Proyecto SENA - Gestión Porcina</p>
+        </div>
+    </footer>
+
+    <script>
+        // Filtro de busqueda en tiempo real (solo del lado del cliente)
+        document.getElementById('buscarCerdo').addEventListener('input', function () {
+            const filtro = this.value.toLowerCase();
+            document.querySelectorAll('#tablaCerdos tbody tr').forEach(function (fila) {
+                fila.style.display = fila.innerText.toLowerCase().includes(filtro) ? '' : 'none';
+            });
+        });
+    </script>
+
+</body>
+</html>
