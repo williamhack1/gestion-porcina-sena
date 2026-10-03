@@ -1,0 +1,16 @@
+========================================================
+ENLACE DEL REPOSITORIO - EVIDENCIA GA7-220501096-AA3-EV01
+========================================================
+
+Aprendiz: William Alejandro Hernandez Barrera
+
+Enlace del repositorio:
+https://github.com/williamhack1/gestion-porcina-sena
+
+Herramienta de versionamiento: Git + GitHub
+
+Descripcion:
+Modulo del software "Sistema de Gestion Porcina" (entidad Cerdo)
+desarrollado con Node.js + Express + MySQL, aplicando el patron MVC.
+
+========================================================
